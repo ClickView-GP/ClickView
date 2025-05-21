@@ -8,9 +8,9 @@ function DashbordLayout({children}) {
         <div className='min-h-screen bg-white'>
             <Header/>
 
-            <daiv className='flex items-center justify-center  '>
+            <div className='flex items-center justify-center  '>
                 {children}
-            </daiv>
+            </div>
             
         </div>
     )

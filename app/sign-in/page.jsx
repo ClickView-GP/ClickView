@@ -30,7 +30,7 @@ export default function SignInPage() {
     } else {
       setErrors({});
       setSubmitted(true);
-      // ترسلي البيانات للباك إند هنا
+      
       console.log("Login submitted:", formData);
     }
   };
@@ -48,7 +48,7 @@ export default function SignInPage() {
           </div>
 
           <div className="space-y-4 mt-4">
-            {/* Email */}
+            
             <div>
               <input
                 name="email"
@@ -62,7 +62,7 @@ export default function SignInPage() {
               {errors.email && <p className="text-xs mt-1" style={{color:colors.error}}>{errors.email}</p>}
             </div>
 
-            {/* Password */}
+            
             <div>
               <input
                 name="password"
@@ -76,7 +76,7 @@ export default function SignInPage() {
               {errors.password && <p className=" text-xs mt-1" style={{color:colors.error}}>{errors.password}</p>}
             </div>
 
-            {/* Login Button */}
+            
             <button
               type="submit"
               className="w-full py-3 rounded-md font-Poppins text-center cursor-pointer"
@@ -85,14 +85,14 @@ export default function SignInPage() {
               Sign In
             </button>
 
-            {/* Forgot Password */}
+            
             <div className="flex justify-end text-sm text-gray-600">
               <a href="/forgot-password" className=" hover:underline font-medium" style={{color:colors.secondary}}>
                 Forgot password?
               </a>
             </div>
 
-            {/* Divider */}
+            
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
@@ -102,7 +102,7 @@ export default function SignInPage() {
               </div>
             </div>
 
-            {/* Google Sign-in Placeholder */}
+            
             <button
               type="button"
               className="w-full flex items-center justify-start gap-3 border border-gray-300 py-3 px-4
@@ -118,7 +118,7 @@ export default function SignInPage() {
               Continue with Google
             </button>
 
-            {/* Redirect to Sign Up */}
+            
             <p className="mt-4 text-center text-sm text-gray-600 mb-7">
               New to ClickView?{' '}
               <a href="/sign-up" className=" hover:underline font-medium"style={{color:colors.secondary}}>
@@ -128,7 +128,7 @@ export default function SignInPage() {
           </div>
         </form>
 
-        {/* Success message */}
+        
         {submitted && (
           <p className="text-sm text-center"style={{color:colors.success}}>✅ Login successful! (Mocked)</p>
         )}

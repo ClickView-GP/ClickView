@@ -63,7 +63,7 @@ export default function SignUpPage() {
               {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
             </div>
 
-            {/* Email */}
+            
             <div>
               <input
                 name="email"
@@ -99,7 +99,7 @@ export default function SignUpPage() {
               Sign Up
             </button>
 
-            {/* Divider */}
+            
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
@@ -109,7 +109,7 @@ export default function SignUpPage() {
               </div>
             </div>
 
-            {/* Google Sign-in Placeholder */}
+            
             <button
               type="button"
               className="w-full flex items-center justify-start gap-3 border border-gray-300 py-3 px-4
@@ -125,7 +125,7 @@ export default function SignUpPage() {
               Continue with Google
             </button>
 
-            {/* Sign In Redirect */}
+          
             <p className="mt-4 text-center text-sm text-gray-600 mb-7">
               Already on ClickView?{' '}
               <a href="/sign-in" className="text-indigo-700 hover:underline font-medium">
@@ -135,7 +135,7 @@ export default function SignUpPage() {
           </div>
         </form>
 
-        {/* Success message */}
+        
         {submitted && (
           <p className="text-green-600 text-sm text-center">✅ Registration successful! (Mocked)</p>
         )}
