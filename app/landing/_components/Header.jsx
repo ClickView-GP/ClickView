@@ -15,7 +15,7 @@ function Header() {
             <li className='hover:text-violet-500 hover:font-bold transition-all cursor-pointer'>Features</li>
             <li className='hover:text-violet-500 hover:font-bold transition-all cursor-pointer'>About us</li>
         </ul>
-            <Link href="/sign-in">
+            <Link href="/auth/sign-in">
             <button className="w-full px-4 py-2 rounded-md text-sm  cursor-pointer" 
             style={{backgroundColor:colors.secondary,color:colors.text.muted}}>
               Sign In

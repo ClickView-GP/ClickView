@@ -1,11 +1,11 @@
 'use client'
-
+import colors from '@/app/lab/colors';
 import Image from 'next/image';
 import { useState } from 'react';
-import colors from '../lab/colors';
 
-export default function SignInPage() {
+export default function SignUpPage() {
   const [formData, setFormData] = useState({
+    fullName: '',
     email: '',
     password: '',
   });
@@ -20,7 +20,9 @@ export default function SignInPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+
     const newErrors = {};
+    if (!formData.fullName) newErrors.fullName = "Full name is required.";
     if (!formData.email) newErrors.email = "Email is required.";
     if (!formData.password) newErrors.password = "Password is required.";
     else if (formData.password.length < 6) newErrors.password = "Password must be at least 6 characters.";
@@ -30,24 +32,38 @@ export default function SignInPage() {
     } else {
       setErrors({});
       setSubmitted(true);
-      
-      console.log("Login submitted:", formData);
+      console.log("Submitted:", formData);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{backgroundColor:colors.background}}>
+    <div className="min-h-screen bg-white flex items-center justify-center px-4">
+       <Image src="/logo2.svg" width={80} height={80} alt="logo"  className="absolute top-0 left-0 m-4" />
       <div className="max-w-sm w-full space-y-2">
-        <div className="text-center flex flex-col items-center justify-center space-y-2 mt-7">
+        <div className="text-center flex flex-col items-center justify-center space-y-2 mt-5">
           <Image src="/logo1.svg" width={180} height={180} alt="logo" />
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="text-center">
-            <h2 className="text-xl font-medium " style={{color:colors.primary}}>Welcome Back</h2>
+            <h2 className="text-xl font-medium mb-5 text-black">Register</h2>
+            {/*<p className="text-gray-700 ">Join the community today!</p>*/}
           </div>
 
-          <div className="space-y-4 mt-4">
+          <div className="space-y-4">
+            
+            <div>
+              <input
+                name="fullName"
+                placeholder="Full Name"
+                value={formData.fullName}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-500 rounded-xl placeholder-gray-400 text-gray-800
+                  hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
+              />
+              {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
+            </div>
+
             
             <div>
               <input
@@ -56,13 +72,12 @@ export default function SignInPage() {
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-500 rounded-md placeholder-gray-400 text-gray-800
+                className="w-full px-4 py-3 border border-gray-500 rounded-xl placeholder-gray-400 text-gray-800
                   hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
               />
-              {errors.email && <p className="text-xs mt-1" style={{color:colors.error}}>{errors.email}</p>}
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
 
-            
             <div>
               <input
                 name="password"
@@ -70,27 +85,20 @@ export default function SignInPage() {
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-500 rounded-md placeholder-gray-400 text-gray-800
+                className="w-full px-4 py-3 border border-gray-500 rounded-xl placeholder-gray-400 text-gray-800
                   hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
               />
-              {errors.password && <p className=" text-xs mt-1" style={{color:colors.error}}>{errors.password}</p>}
+              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
             </div>
 
             
             <button
               type="submit"
-              className="w-full py-3 rounded-md font-Poppins text-center cursor-pointer"
-             style={{backgroundColor:colors.secondary,color:colors.text.muted}}
+              className="w-full  py-3 rounded-xl font-Poppins text-center  cursor-pointer"  
+               style={{backgroundColor:colors.secondary,color:colors.text.muted}}
             >
-              Sign In
+              Sign Up
             </button>
-
-            
-            <div className="flex justify-end text-sm text-gray-600">
-              <a href="/forgot-password" className=" hover:underline font-medium" style={{color:colors.secondary}}>
-                Forgot password?
-              </a>
-            </div>
 
             
             <div className="relative">
@@ -106,7 +114,7 @@ export default function SignInPage() {
             <button
               type="button"
               className="w-full flex items-center justify-start gap-3 border border-gray-300 py-3 px-4
-                rounded-md hover:bg-gray-50 transition bg-white text-gray-700"
+                rounded-xl hover:bg-gray-50 transition bg-white text-gray-700"
               onClick={() => alert("Google sign-in not yet implemented")}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -118,11 +126,11 @@ export default function SignInPage() {
               Continue with Google
             </button>
 
-            
+          
             <p className="mt-4 text-center text-sm text-gray-600 mb-7">
-              New to ClickView?{' '}
-              <a href="/sign-up" className=" hover:underline font-medium"style={{color:colors.secondary}}>
-                Sign up
+              Already on ClickView?{' '}
+              <a href="/auth/sign-in" className="text-indigo-700 hover:underline font-medium">
+                sign in
               </a>
             </p>
           </div>
@@ -130,7 +138,7 @@ export default function SignInPage() {
 
         
         {submitted && (
-          <p className="text-sm text-center"style={{color:colors.success}}>✅ Login successful! (Mocked)</p>
+          <p className="text-green-600 text-sm text-center">✅ Registration successful! (Mocked)</p>
         )}
       </div>
     </div>
