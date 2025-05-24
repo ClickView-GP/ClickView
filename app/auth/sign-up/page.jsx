@@ -5,7 +5,8 @@ import { useState } from 'react';
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
   });
@@ -17,24 +18,57 @@ export default function SignUpPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
+  const newErrors = {};
+  if (!formData.firstName) newErrors.firstName = "First name is required.";
+  if (!formData.lastName) newErrors.lastName = "Last name is required.";
+  if (!formData.email) newErrors.email = "Email is required.";
+  if (!formData.password) newErrors.password = "Password is required.";
+  else if (formData.password.length < 6) newErrors.password = "Password must be at least 6 characters.";
 
-    const newErrors = {};
-    if (!formData.fullName) newErrors.fullName = "Full name is required.";
-    if (!formData.email) newErrors.email = "Email is required.";
-    if (!formData.password) newErrors.password = "Password is required.";
-    else if (formData.password.length < 6) newErrors.password = "Password must be at least 6 characters.";
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
+  }
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-    } else {
-      setErrors({});
-      setSubmitted(true);
-      console.log("Submitted:", formData);
+  setErrors({});
+
+  try {
+    const response = await fetch("http://localhost:5133/api/user/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to register");
     }
-  };
+
+    const data = await response.json();
+    console.log("API Response:", data);
+
+    if (data.message === "User registered successfully") {
+      setSubmitted(true);
+      // Optionally reset form:
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+      });
+    } else {
+      alert("Something went wrong!");
+    }
+
+  } catch (error) {
+    console.error("Error:", error);
+    alert("An error occurred. Please try again.");
+  }
+};
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center px-4">
@@ -52,17 +86,30 @@ export default function SignUpPage() {
 
           <div className="space-y-4">
             
-            <div>
-              <input
-                name="fullName"
-                placeholder="Full Name"
-                value={formData.fullName}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-500 rounded-xl placeholder-gray-400 text-gray-800
-                  hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
-              />
-              {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
-            </div>
+           <div className="grid grid-cols-2 gap-4">
+  <div>
+    <input
+      name="firstName"
+      placeholder="First Name"
+      value={formData.firstName}
+      onChange={handleChange}
+      className="w-full px-4 py-3 border border-gray-500 rounded-xl placeholder-gray-400 text-gray-800
+        hover:bg-gray-50 transition focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
+    />
+    {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
+  </div>
+  <div>
+    <input
+      name="lastName"
+      placeholder="Last Name"
+      value={formData.lastName}
+      onChange={handleChange}
+      className="w-full px-4 py-3 border border-gray-500 rounded-xl placeholder-gray-400 text-gray-800
+       hover:bg-gray-50 transition focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
+    />
+    {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
+  </div>
+</div>
 
             
             <div>
@@ -73,7 +120,7 @@ export default function SignUpPage() {
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-500 rounded-xl placeholder-gray-400 text-gray-800
-                  hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
+                 hover:bg-gray-50 transition focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
               />
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
@@ -86,7 +133,7 @@ export default function SignUpPage() {
                 value={formData.password}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-500 rounded-xl placeholder-gray-400 text-gray-800
-                  hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
+                  hover:bg-gray-50 transition focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
               />
               {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
             </div>

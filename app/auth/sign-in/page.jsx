@@ -59,7 +59,7 @@ export default function SignInPage() {
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-500 rounded-xl placeholder-gray-400 text-gray-800
-                  hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
+                hover:bg-gray-50 transition focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
               />
               {errors.email && <p className="text-xs mt-1" style={{color:colors.error}}>{errors.email}</p>}
             </div>
@@ -73,7 +73,7 @@ export default function SignInPage() {
                 value={formData.password}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-500 rounded-xl placeholder-gray-400 text-gray-800
-                  hover:shadow-lg focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
+                  hover:bg-gray-50 transition focus:outline-none focus:ring-1 focus:ring-indigo-700 focus:border-indigo-700"
               />
               {errors.password && <p className=" text-xs mt-1" style={{color:colors.error}}>{errors.password}</p>}
             </div>

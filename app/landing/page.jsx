@@ -50,8 +50,8 @@ export default function ClickViewLanding() {
           How It Works
         </h2>
       
-        <div className="grid md:grid-cols-2 gap-10 px-4 mt-20">
-          <div className="flex gap-4 text-left">
+        <div className="grid md:grid-cols-2 gap-10 px-4 mt-20 text-center">
+          <div className="flex gap-4 ">
             <Image src="/smart.svg" width={80} height={80} alt="Smart Questions" />
             <div>
               <h3 className="font-bold mb-3" style={{color: colors.primary}}>
@@ -64,7 +64,7 @@ export default function ClickViewLanding() {
             </div>
           </div>
 
-          <div className="flex gap-4 text-left">
+          <div className="flex gap-4 ">
             <Image src="/on-point.svg" width={90} height={90} alt="On-point Feedback" />
             <div>
               <h3 className="font-bold mb-3" style={{color: colors.primary}}>
@@ -77,7 +77,7 @@ export default function ClickViewLanding() {
             </div>
           </div>
 
-          <div className="flex gap-4 text-left">
+          <div className="flex gap-4 ">
             <Image src="/track.svg" width={80} height={80} alt="Track Progress" />
             <div>
               <h3 className="font-bold mb-3" style={{color: colors.primary}}>
@@ -90,7 +90,7 @@ export default function ClickViewLanding() {
             </div>
           </div>
 
-          <div className="flex gap-4 text-left">
+          <div className="flex gap-4 ">
             <Image src="/res.svg" width={80} height={80} alt="Results" />
             <div>
               <h3 className="font-bold mb-3" style={{color: colors.primary}}>
