@@ -51,9 +51,18 @@ export default function SettingsPage() {
     let errors = {};
     if (!passwords.current) errors.current = "Current password is required.";
     if (!passwords.new) errors.new = "New password is required.";
-    else if (passwords.new.length < 8) errors.new = "Password must be at least 8 characters.";
-    if (!passwords.confirm) errors.confirm = "Please confirm your new password.";
-    else if (passwords.new !== passwords.confirm) errors.confirm = "Passwords do not match.";
+    else if (password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters.";
+    } else if (!/\d/.test(password)) {
+      newErrors.password = "Password must include at least one number (0-9).";
+    } else if (!/[!@#$%^&*()_+\\/;:]/.test(password)) {
+      newErrors.password =
+        "Password must include at least one special character (!@#$%^&*()_+\\/;:).";
+    }
+    if (!passwords.confirm)
+      errors.confirm = "Please confirm your new password.";
+    else if (passwords.new !== passwords.confirm)
+      errors.confirm = "Passwords do not match.";
 
     setPasswordErrors(errors);
 
@@ -99,9 +108,15 @@ export default function SettingsPage() {
         throw new Error("Failed to update profile");
       }
 
-      setUpdateMessage({ type: "success", text: "Profile updated successfully." });
+      setUpdateMessage({
+        type: "success",
+        text: "Profile updated successfully.",
+      });
     } catch (error) {
-      setUpdateMessage({ type: "error", text: "Error updating profile: " + error.message });
+      setUpdateMessage({
+        type: "error",
+        text: "Error updating profile: " + error.message,
+      });
     }
   };
 
@@ -202,7 +217,9 @@ export default function SettingsPage() {
           {updateMessage && (
             <p
               className={`mt-2 text-sm font-Poppins ${
-                updateMessage.type === "success" ? "text-green-500" : "text-red-500"
+                updateMessage.type === "success"
+                  ? "text-green-500"
+                  : "text-red-500"
               }`}
             >
               {updateMessage.text}
@@ -237,7 +254,11 @@ export default function SettingsPage() {
               onChange={handlePasswordChange}
               required
             />
-            {passwordErrors.current && <p className="text-red-500 text-sm mt-1">{passwordErrors.current}</p>}
+            {passwordErrors.current && (
+              <p className="text-red-500 text-sm mt-1">
+                {passwordErrors.current}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col mb-4" style={{ color: colors.primary }}>
@@ -253,7 +274,9 @@ export default function SettingsPage() {
               onChange={handlePasswordChange}
               required
             />
-            {passwordErrors.new && <p className="text-red-500 text-sm mt-1">{passwordErrors.new}</p>}
+            {passwordErrors.new && (
+              <p className="text-red-500 text-sm mt-1">{passwordErrors.new}</p>
+            )}
           </div>
 
           <div className="flex flex-col mb-4" style={{ color: colors.primary }}>
@@ -269,7 +292,11 @@ export default function SettingsPage() {
               onChange={handlePasswordChange}
               required
             />
-            {passwordErrors.confirm && <p className="text-red-500 text-sm mt-1">{passwordErrors.confirm}</p>}
+            {passwordErrors.confirm && (
+              <p className="text-red-500 text-sm mt-1">
+                {passwordErrors.confirm}
+              </p>
+            )}
           </div>
 
           <div className="flex justify-end">
