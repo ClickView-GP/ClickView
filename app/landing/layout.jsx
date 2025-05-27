@@ -3,7 +3,7 @@ import Header from './_components/Header'
 
 
 
-function DashbordLayout({children}) {
+function LandingLayout({children}) {
     return (
         <div className='min-h-screen bg-white'>
             <Header/>
@@ -16,4 +16,4 @@ function DashbordLayout({children}) {
     )
 }
 
-export default DashbordLayout
+export default LandingLayout

@@ -26,7 +26,7 @@ const handleSubmit = async (e) => {
   if (!formData.lastName) newErrors.lastName = "Last name is required.";
   if (!formData.email) newErrors.email = "Email is required.";
   if (!formData.password) newErrors.password = "Password is required.";
-  else if (formData.password.length < 6) newErrors.password = "Password must be at least 6 characters.";
+  else if (formData.password.length < 8) newErrors.password = "Password must be at least 8 characters.";
 
   if (Object.keys(newErrors).length > 0) {
     setErrors(newErrors);
@@ -110,8 +110,6 @@ const handleSubmit = async (e) => {
     {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
   </div>
 </div>
-
-            
             <div>
               <input
                 name="email"
